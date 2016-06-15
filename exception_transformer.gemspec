@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'exception-transformer'
+  s.name        = 'exception_transformer'
   s.version     = '0.0.0'
   s.license     = 'MIT'
   s.summary     = ''
@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/Privy/exception-transformer'
   s.authors     = ['Patrick McLaren']
   s.email       = 'patrick@privy.com'
-  s.files       = ['lib/exception_transformer']
+  s.files       = ['lib/exception_transformer.rb']
 
   s.add_development_dependency 'bundler', '~> 1.11'
   s.add_development_dependency 'rspec', '~> 3.4'

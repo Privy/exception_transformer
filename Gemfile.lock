@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    exception-transformer (0.0.0)
+    exception_transformer (0.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -29,7 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.11)
-  exception-transformer!
+  exception_transformer!
   github-markup (~> 1.4)
   redcarpet (~> 3.3)
   rspec (~> 3.4)
