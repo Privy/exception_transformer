@@ -1,0 +1,2 @@
+describe ExceptionTransformer do
+end
