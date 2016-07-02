@@ -21,37 +21,30 @@ class ExceptionTransformer::Transformer
     end
   end
 
-  def after_rescue(obj, e, calling_method, except: [], use_default: true, report: true)
-    case strategy
-    when :delegate
-      obj.instance_exec(e, calling_method, &delegate)
-    when :rewrite, :regex
-      exception, message = find_target(e, except, use_default)
-    else
-      raise
-    end
-
-    if exception.present?
-      if defined?(Raven) && report
-        # Create an instance of the exception to send to Sentry. We can't
-        # use `Raven.capture do ... end` because we want to report the full message.
-        inst_to_report = exception.new(e.message)
-        inst_to_report.set_backtrace(e.backtrace)
-        Raven.capture_exception(inst_to_report)
+  def after_rescue(obj, e, calling_method, except: [], use_default: true)
+    with_reporting do
+      case strategy
+      when :delegate
+        obj.instance_exec(e, calling_method, &delegate)
+      when :rewrite, :regex
+        exception, message = find_target(e, except, use_default)
       end
 
-      raise exception, message.first(MAX_MESSAGE_SIZE), e.backtrace
-    else
-      # We couldn't transform the exception, so this should be sent to Sentry
-      # unless otherwise caught.
-      raise
+      if exception.present?
+        raise exception, message.first(MAX_MESSAGE_SIZE), e.backtrace
+      else
+        # Couldn't transform the exception to a defined mapping.
+        raise e
+      end
     end
   end
 
-  def after_yield(obj, result, calling_method, except: [], use_default: true, report: true)
-    case strategy
-    when :validate
-      obj.instance_exec(result, calling_method, &validator)
+  def after_yield(obj, result, calling_method, except: [], use_default: true)
+    with_reporting do
+      case strategy
+      when :validate
+        obj.instance_exec(result, calling_method, &validator)
+      end
     end
   end
 
@@ -82,5 +75,17 @@ class ExceptionTransformer::Transformer
       .select  { |klass| e.is_a?(klass) && !exclude.include?(klass) }
       .sort_by { |klass, _| klass.ancestors.count }
       .last.try(:[], 1)
+  end
+
+  # Report all exceptions that occur except those
+  # with the `reportable?` flag set to false.
+  def with_reporting
+    yield
+  rescue => e
+    unless e.respond_to?(:reportable?) && !e.reportable?
+      ExceptionTransformer::Config.reporter.call(e)
+    end
+
+    raise
   end
 end

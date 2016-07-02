@@ -4,6 +4,22 @@ module ExceptionTransformer
     base.extend ClassMethods
   end
 
+  module Config
+    class << self
+      def configure
+        yield self
+      end
+
+      def reporter
+        @reporter ||= proc { |e| }
+      end
+
+      def reporter=(reporter_proc)
+        @reporter = reporter_proc
+      end
+    end
+  end
+
   module ClassMethods
     # Add exceptions to be transformed in `handle_exceptions` block.
     # @examples
@@ -73,4 +89,5 @@ module ExceptionTransformer
   end
 end
 
+require_relative "exception_transformer/reportable"
 require_relative "exception_transformer/transformer"
