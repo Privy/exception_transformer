@@ -1,5 +1,8 @@
-require "exception_transformer/version"
+require 'exception_transformer/version'
+require 'exception_transformer/transformer'
 
+require 'active_support'
+require 'active_support/core_ext'
 
 module ExceptionTransformer
   def self.included base
