@@ -83,8 +83,7 @@ class ExceptionTransformer::Transformer
     yield
   rescue => e
     unless e.respond_to?(:reportable?) && !e.reportable?
-      # @examples
-      #   Raven.capture_exception(e)
+      ExceptionTransformer.config
     end
 
     raise

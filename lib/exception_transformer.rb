@@ -1,13 +1,32 @@
 require 'exception_transformer/version'
+require 'exception_transformer/config'
 require 'exception_transformer/transformer'
 
 require 'active_support'
 require 'active_support/core_ext'
 
+# TODO: remove byebug
+require 'byebug'
+
 module ExceptionTransformer
+  attr_accessor :config
+
   def self.included base
     base.send :include, InstanceMethods
     base.extend ClassMethods
+  end
+
+  # @example
+  # Can take a configuration block:
+  #   ExceptionTransformer.configure do |config|
+  #     config.reporter = proc { |e| Raven.capture_exception(e) }
+  #   end
+  def self.configure
+    yield config if block_given?
+  end
+
+  def self.config
+    @reporter ||= Config.new
   end
 
   module ClassMethods
@@ -65,6 +84,7 @@ module ExceptionTransformer
     def handle_exceptions(group = :default, **opts)
       # NOTE: `base_label` returns the label of this frame without decoration,
       # i.e. if `label` was 'block in test', then `base_label` would be `test`.
+
       calling_method = caller_locations(1, 1)[0].base_label
       transformer    = self.class.find_exception_transformer(group)
 

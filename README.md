@@ -1,5 +1,13 @@
 # exception-transformer
 
+# Crash Reporter
+A crash reporter should be configured during the gem setup.
+  ```ruby
+  ExceptionTransformer.configure do |config|
+    config.reporter = proc { |e| Raven.capture_exception(e) }
+  end
+  ```
+
 # Examples
 Add exceptions to be transformed in `handle_exceptions` block.
 
