@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ClassHelpers
   # Defines a named class, descending from `super_class`.
   # The constant assigned to the the class will be restored

@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 require 'exception_transformer/version'
 require 'exception_transformer/config'
 require 'exception_transformer/transformer'
 
 require 'active_support'
 require 'active_support/core_ext'
-
-# TODO: remove byebug
-require 'byebug'
 
 module ExceptionTransformer
   attr_accessor :config
@@ -16,8 +15,8 @@ module ExceptionTransformer
     base.extend ClassMethods
   end
 
+  # To send exceptions to a crash reporter, implement a configuration block:
   # @example
-  # Can take a configuration block:
   #   ExceptionTransformer.configure do |config|
   #     config.reporter = proc { |e| Raven.capture_exception(e) }
   #   end
@@ -26,7 +25,7 @@ module ExceptionTransformer
   end
 
   def self.config
-    @reporter ||= Config.new
+    @config ||= Config.new
   end
 
   module ClassMethods

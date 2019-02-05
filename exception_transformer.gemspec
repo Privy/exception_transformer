@@ -11,13 +11,12 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Error Handling'
   spec.description   = 'Add exceptions to be transformed.'
   spec.files         =  Dir.glob('{lib,spec}/**/*')
-  spec.homepage      = 'https://github.com/Privy/exception-transformer'
+  spec.homepage      = 'https://github.com/Privy/exception_transformer'
   spec.license       = 'MIT'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'byebug', '~> 10.0'
 
   spec.add_dependency 'activesupport', '~> 5.0'
 end

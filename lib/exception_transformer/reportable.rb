@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExceptionTransformer
   # Include this module when declaring an exception class to add
   # the `reportable?` flag to individual exceptions. The presence

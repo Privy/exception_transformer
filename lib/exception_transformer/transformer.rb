@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExceptionTransformer::Transformer
   attr_accessor :strategy, :validator, :delegate, :mappings
 
@@ -83,7 +85,7 @@ class ExceptionTransformer::Transformer
     yield
   rescue => e
     unless e.respond_to?(:reportable?) && !e.reportable?
-      ExceptionTransformer.config
+      ExceptionTransformer.config.reporter
     end
 
     raise

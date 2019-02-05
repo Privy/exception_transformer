@@ -1,4 +1,4 @@
-require 'exception_transformer'
+# frozen_string_literal: true
 
 describe ExceptionTransformer do
   class FooError < StandardError; end
