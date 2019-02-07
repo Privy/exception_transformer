@@ -85,7 +85,7 @@ class ExceptionTransformer::Transformer
     yield
   rescue => e
     unless e.respond_to?(:reportable?) && !e.reportable?
-      ExceptionTransformer.config.reporter
+      ExceptionTransformer.config.reporter.call(e)
     end
 
     raise
