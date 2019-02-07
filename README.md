@@ -1,15 +1,9 @@
 # exception-transformer
+Add exceptions to be transformed in `handle_exceptions` block.
 
-# Crash Reporter
-A crash reporter should be configured during the gem setup.
-  ```ruby
-  ExceptionTransformer.configure do |config|
-    config.reporter = proc { |e| Raven.capture_exception(e) }
-  end
-  ```
+Battle-tested in production at [Privy](https://www.privy.com).
 
 # Examples
-Add exceptions to be transformed in `handle_exceptions` block.
 
 1. Transform several errors to a single error:
   ```ruby
@@ -36,4 +30,12 @@ first parameter is the response, and the second is the calling method.
 first parameter is the error, and the second is the calling method.
   ```ruby
   transform_exceptions with: proc { |err, action| ... }
+  ```
+
+# Crash Reporter
+A crash reporter should be configured during the gem setup.
+  ```ruby
+  ExceptionTransformer.configure do |config|
+    config.reporter = proc { |e| Raven.capture_exception(e) }
+  end
   ```
