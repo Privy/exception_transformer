@@ -29,7 +29,7 @@ module ExceptionTransformer
     module ClassMethods
       # Returns a subclass 'Reportable_<name>' of the current class that
       # includes `Reportable`. This subclass is created the first time
-      # time this method is called and reused for subsequent invocations.
+      # this method is called and reused for subsequent invocations.
       def as_reportable
         return self if self <= ReportableException
 
