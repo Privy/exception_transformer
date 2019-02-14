@@ -3,6 +3,7 @@
 require 'exception_transformer/version'
 require 'exception_transformer/config'
 require 'exception_transformer/transformer'
+require 'exception_transformer/reportable'
 
 require 'active_support'
 require 'active_support/core_ext'
