@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['patrick@privy.com', 'allina@privy.com']
 
   spec.summary       = 'Error Handling'
-  spec.description   = 'Transform exceptions and send to a crash reporter'
+  spec.description   = 'Transform exceptions and send to a crash reporter.'
   spec.files         =  Dir.glob('{lib,spec}/**/*')
   spec.homepage      = 'https://github.com/Privy/exception_transformer'
   spec.license       = 'MIT'
