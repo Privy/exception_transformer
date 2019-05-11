@@ -34,14 +34,14 @@ module ExceptionTransformer
         return self if self <= ReportableException
 
         name = reportable_name
-        mod  = parent
+        mod = self.respond_to?(:module_parent) ? module_parent : parent
 
         mod.const_defined?(name) ? mod.const_get(name) : mod.const_set(name, build_reportable)
       end
 
       def unload_reportable
         name = reportable_name
-        mod  = parent
+        mod = self.respond_to?(:module_parent) ? module_parent : parent
 
         mod.send(:remove_const, name) if mod.const_defined?(name)
       end
