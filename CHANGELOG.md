@@ -2,6 +2,10 @@
 
 * Description here
 
+## 1.0.3
+
+* Feature: #5 Fix Ruby 2.7 kwargs
+
 ## 1.0.2
 
 * Feature: #4 Rails6 support
