@@ -90,11 +90,11 @@ module ExceptionTransformer
 
       result = yield
 
-      transformer.after_yield(self, result, calling_method, opts)
+      transformer.after_yield(self, result, calling_method, **opts)
 
       result
     rescue => e
-      transformer.after_rescue(self, e, calling_method, opts)
+      transformer.after_rescue(self, e, calling_method, **opts)
     end
   end
 end
