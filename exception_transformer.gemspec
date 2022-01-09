@@ -14,9 +14,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/Privy/exception_transformer'
   spec.license       = 'MIT'
 
-  spec.add_development_dependency 'bundler', '~> 2.0.2'
-  spec.add_development_dependency 'rake', '>= 12.3.3'
-  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.required_ruby_version = '>= 2.6.0'
 
-  spec.add_dependency 'activesupport', '>= 5.0', '< 7'
+  spec.add_development_dependency 'bundler', '>= 2.2.33'
+  spec.add_development_dependency 'rake', '>= 12.3.3'
+  spec.add_development_dependency 'rspec', '>= 3.0'
+
+  spec.add_dependency 'activesupport', '>= 5.0'
 end

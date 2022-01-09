@@ -19,7 +19,7 @@ jobs:
       with:
         ruby-version: 2.6
         bundler-cache: true
-        bundler: 2.0.2
+        bundler: 2.2.33
     - name: Install dependencies
       run: bundle install
     - name: Run tests
