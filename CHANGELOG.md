@@ -2,6 +2,10 @@
 
 * Description here
 
+## 1.0.4
+
+* Remove upper bound for gems
+
 ## 1.0.3
 
 * Feature: #5 Fix Ruby 2.7 kwargs
